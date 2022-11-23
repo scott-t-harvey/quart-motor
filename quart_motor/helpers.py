@@ -56,7 +56,7 @@ class BSONObjectIdConverter(BaseConverter):
         return str(value)
 
 
-class JSONEncoder(quart_json.JSONEncoder):
+class JSONEncoder(quart_json.provider.DefaultJSONProvider):
     """A JSON encoder that uses :mod:`bson.json_util` for MongoDB documents.
 
     .. code-block:: python
@@ -84,7 +84,7 @@ class JSONEncoder(quart_json.JSONEncoder):
     .. versionadded:: 2.4.0
     """
 
-    def __init__(self, json_options, *args, **kwargs):
+    def __init__(self, app, json_options, *args, **kwargs):
         """__init__."""
         if json_options is None:
             json_options = DEFAULT_JSON_OPTIONS
